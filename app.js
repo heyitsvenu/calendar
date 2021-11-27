@@ -19,8 +19,8 @@ const dayBody = document.querySelector('.day-body');
 const nextBtn = document.querySelector('.next-btn');
 const prevBtn = document.querySelector('.prev-btn');
 
-function getCurrMonth() {
-  const date = new Date();
+function getCurrMonth(year, month) {
+  const date = new Date(year, month, 1);
   return {
     month: date.getMonth(),
     year: date.getFullYear(),
@@ -60,13 +60,14 @@ function daysInMonth(month, year) {
 function getCurrMonthDays() {
   const date = new Date();
   let curr = getCurrMonth(date.getFullYear(), date.getMonth());
+  console.log(date.getDate());
   let day = curr.day;
   for (let i = 0; i < day; i++) {
     dayBody.innerHTML += `<div class="day"></div>`;
   }
   let totalDays = daysInMonth(curr.month + 1, curr.year);
   for (let i = 0; i < totalDays; i++) {
-    if (i == curr.date - 1) {
+    if (i == date.getDate() - 1) {
       dayBody.innerHTML += `<div class="day" style="color:red; border: 1px solid red; border-radius: 50%;">${
         i + 1
       }</div>`;
